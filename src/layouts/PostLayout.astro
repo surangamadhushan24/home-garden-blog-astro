@@ -1,0 +1,130 @@
+---
+// src/layouts/PostLayout.astro
+import BaseLayout from './BaseLayout.astro';
+import { Image } from 'astro:assets';
+import { formatDate } from '../utils/helpers';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    updatedDate?: Date;
+    author: string;
+    category: string;
+    categorySlug: string;
+    tags: string[];
+    readTime: string;
+    heroImage: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const { title, description, pubDate, updatedDate, author, category, categorySlug, tags, readTime, heroImage } = frontmatter;
+
+// Get related posts (same category)
+import { getCollection } from 'astro:content';
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const relatedPosts = allPosts
+  .filter(p => p.data.categorySlug === categorySlug && p.data.title !== title)
+  .slice(0, 3);
+---
+
+<BaseLayout 
+  title={title} 
+  description={description}
+  type="article"
+  publishDate={pubDate}
+  author={author}
+  ogImage={heroImage}
+>
+  <article class="w-full">
+    <!-- Hero Section -->
+    <div class="relative w-full h-[60vh] min-h-[400px] overflow-hidden">
+      <img
+        src={heroImage}
+        alt={title}
+        class="absolute inset-0 w-full h-full object-cover"
+        transition:name={`hero-${title}`}
+      />
+      <div class="hero-overlay absolute inset-0" />
+      
+      <div class="relative z-10 h-full flex items-end">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-12">
+          <span class="tag inline-block bg-sage/80 text-bark px-3 py-1 rounded-full mb-4">
+            {category}
+          </span>
+          <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
+            {title}
+          </h1>
+          <div class="flex items-center gap-4 text-white/80 text-sm">
+            <span>{author}</span>
+            <span class="w-1 h-1 rounded-full bg-white/40"></span>
+            <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+            <span class="w-1 h-1 rounded-full bg-white/40"></span>
+            <span>{readTime} read</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Content -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="prose prose-lg max-w-none prose-headings:font-display prose-a:text-forest hover:prose-a:text-leaf">
+        <slot />
+      </div>
+      
+      <!-- Tags -->
+      <div class="mt-12 pt-8 border-t border-sage/20">
+        <h3 class="font-display text-lg text-bark mb-3">Tags</h3>
+        <div class="flex flex-wrap gap-2">
+          {tags.map(tag => (
+            <a 
+              href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
+              class="tag bg-mist text-forest px-3 py-1.5 rounded-full hover:bg-sage/30 transition-colors"
+            >
+              {tag}
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Author Box -->
+      <div class="mt-12 bg-mist rounded-2xl p-6 flex items-start gap-4">
+        <div class="w-16 h-16 bg-forest rounded-full flex items-center justify-center text-2xl flex-shrink-0">
+          🌿
+        </div>
+        <div>
+          <h4 class="font-display text-lg text-bark">{author}</h4>
+          <p class="text-gray-500 text-sm mt-1">
+            Contributing writer at Bloom & Grow, passionate about creating beautiful living spaces.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Related Posts -->
+    {relatedPosts.length > 0 && (
+      <section class="bg-mist py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="font-display text-2xl text-bark mb-8">Related Articles</h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            {relatedPosts.map(post => (
+              <a href={`/blog/${post.id}/`} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div class="h-40 overflow-hidden">
+                  <img src={post.data.heroImage} alt={post.data.title} class="w-full h-full object-cover post-img" />
+                </div>
+                <div class="p-4">
+                  <span class="tag text-forest text-xs">{post.data.category}</span>
+                  <h3 class="font-display text-lg text-bark mt-1 group-hover:text-forest transition-colors line-clamp-2">
+                    {post.data.title}
+                  </h3>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>

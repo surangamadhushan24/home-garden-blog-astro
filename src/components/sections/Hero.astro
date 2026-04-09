@@ -1,0 +1,80 @@
+---
+// src/components/sections/Hero.astro
+import { getCollection } from 'astro:content';
+import Button from '../ui/Button.astro';
+
+// Get latest featured post
+const posts = await getCollection('blog', ({ data }) => !data.draft && data.featured);
+const heroPost = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0] || {
+  data: {
+    title: "10 Small Garden Ideas for Apartments",
+    description: "Transform even the tiniest balcony into a lush green retreat. These space-saving garden ideas will surprise you.",
+    category: "Gardening",
+    author: "Sarah Mitchell",
+    pubDate: new Date("2026-03-25"),
+    readTime: "6 min",
+    heroImage: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600&q=80&auto=format&fit=crop"
+  },
+  slug: "small-garden-ideas"
+};
+
+const { title, description, category, author, pubDate, readTime, heroImage } = heroPost.data;
+const formattedDate = pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+
+<section class="relative w-full h-[88vh] min-h-[560px] overflow-hidden">
+  <img
+    src={heroImage}
+    alt={title}
+    class="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+    transition:name={`hero-${title}`}
+  />
+  <div class="hero-overlay absolute inset-0"></div>
+
+  <div class="relative z-10 h-full flex items-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="max-w-2xl">
+        <span class="tag inline-block bg-sage/80 text-bark px-3 py-1 rounded-full mb-5 animate-fade-up">
+          🌱 {category}
+        </span>
+        
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-5 animate-fade-up delay-100" style="opacity: 0; animation-fill-mode: forwards;">
+          {title.split(' ').slice(0, 3).join(' ')}<br/>
+          <em class="italic">{title.split(' ').slice(3).join(' ')}</em>
+        </h1>
+        
+        <p class="text-white/80 text-lg mb-8 leading-relaxed max-w-lg animate-fade-up delay-200" style="opacity: 0; animation-fill-mode: forwards;">
+          {description}
+        </p>
+        
+        <div class="flex flex-wrap gap-3 animate-fade-up delay-300" style="opacity: 0; animation-fill-mode: forwards;">
+          <Button href={`/blog/${heroPost.slug}/`} variant="primary" size="lg">
+            Read Article
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </Button>
+          
+          <Button href="#featured" variant="outline" size="lg">
+            Browse Posts
+          </Button>
+        </div>
+
+        <div class="mt-8 flex items-center gap-4 text-white/60 text-sm animate-fade-up delay-300" style="opacity: 0; animation-fill-mode: forwards;">
+          <span>By {author}</span>
+          <span class="w-1 h-1 rounded-full bg-white/40"></span>
+          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+          <span class="w-1 h-1 rounded-full bg-white/40"></span>
+          <span>{readTime} read</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-7 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-1 animate-bounce-slow">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>

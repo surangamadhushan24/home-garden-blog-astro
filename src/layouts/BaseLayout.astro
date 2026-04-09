@@ -1,0 +1,114 @@
+---
+// src/layouts/BaseLayout.astro
+import { ClientRouter } from 'astro:transitions';
+import { ViewTransitions } from 'astro:transitions';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonical?: string;
+  type?: 'website' | 'article';
+  publishDate?: Date;
+  author?: string;
+}
+
+const { 
+  title, 
+  description, 
+  ogImage = '/images/og-default.jpg',
+  canonical,
+  type = 'website',
+  publishDate,
+  author
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() || 'https://bloomandgrow.blog';
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
+
+// JSON-LD structured data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": type === 'article' ? "BlogPosting" : "WebSite",
+  "headline": title,
+  "description": description,
+  "url": canonicalUrl,
+  ...(publishDate && { "datePublished": publishDate.toISOString() }),
+  ...(author && { 
+    "author": {
+      "@type": "Person",
+      "name": author
+    }
+  }),
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bloom & Grow",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteUrl}/images/logo.png`
+    }
+  }
+};
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="generator" content={Astro.generator} />
+  
+  <!-- Canonical -->
+  <link rel="canonical" href={canonicalUrl} />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(ogImage, siteUrl).toString()} />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(ogImage, siteUrl).toString()} />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  
+  <!-- Client Router for View Transitions -->
+  <ClientRouter />
+  
+  <title>{title} | Bloom & Grow</title>
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" as="style" />
+</head>
+<body class="bg-cream min-h-screen flex flex-col">
+  <Navbar />
+  <main class="flex-1">
+    <slot />
+  </main>
+  <Footer />
+  
+  <!-- Dark mode / Theme initialization (inline to prevent FOUC) -->
+  <script is:inline>
+    // Initialize any theme preferences here
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.classList.add(theme);
+  </script>
+</body>
+</html>

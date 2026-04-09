@@ -1,0 +1,41 @@
+---
+// src/pages/about.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "About Us";
+const description = "Learn about Bloom & Grow, your source for home and garden inspiration.";
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="bg-cream py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <div class="w-20 h-20 bg-forest rounded-full flex items-center justify-center text-4xl mx-auto mb-6">🌿</div>
+        <h1 class="font-display text-4xl text-bark">About Bloom & Grow</h1>
+      </div>
+      
+      <div class="prose prose-lg max-w-none prose-headings:font-display prose-a:text-forest">
+        <p class="lead text-xl text-gray-600 mb-8">
+          We're passionate about helping you create a beautiful home and garden — one small change at a time.
+        </p>
+        
+        <p>
+          Founded in 2024, Bloom & Grow has quickly become a trusted resource for homeowners, renters, and gardening enthusiasts across the United States. Our mission is simple: to make beautiful living accessible to everyone, regardless of budget or experience level.
+        </p>
+        
+        <h2>What We Cover</h2>
+        <ul>
+          <li><strong>Home Decor</strong> — Styling tips, room makeovers, and budget-friendly design ideas</li>
+          <li><strong>Gardening</strong> — From apartment balconies to backyard landscapes</li>
+          <li><strong>DIY Projects</strong> — Step-by-step guides for hands-on home improvements</li>
+          <li><strong>Kitchen</strong> — Organization, recipes, and culinary inspiration</li>
+        </ul>
+        
+        <h2>Our Team</h2>
+        <p>
+          Our writers are real homeowners, experienced gardeners, and DIY enthusiasts who understand the challenges of creating beautiful spaces. We test every tip and project before sharing it with you.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

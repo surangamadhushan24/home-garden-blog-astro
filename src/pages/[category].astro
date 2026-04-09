@@ -1,0 +1,55 @@
+---
+// src/pages/[category].astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/ui/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const categories = ['home-decor', 'gardening', 'diy', 'kitchen'];
+  return categories.map(cat => ({ params: { category: cat } }));
+}
+
+const { category } = Astro.params;
+
+const categoryNames: Record<string, string> = {
+  'home-decor': 'Home Decor',
+  'gardening': 'Gardening',
+  'diy': 'DIY Projects',
+  'kitchen': 'Kitchen'
+};
+
+const posts = await getCollection('blog', ({ data }) => 
+  !data.draft && data.categorySlug === category
+);
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const title = categoryNames[category] || category;
+const description = `Browse all ${title.toLowerCase()} articles on Bloom & Grow.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="bg-cream py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12">
+        <a href="/" class="text-sm text-gray-500 hover:text-forest">← Back to Home</a>
+        <h1 class="font-display text-4xl text-bark mt-4">{title}</h1>
+        <p class="text-gray-500 mt-2">{sortedPosts.length} articles</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedPosts.map(post => (
+          <PostCard 
+            title={post.data.title}
+            slug={post.id}
+            description={post.data.description}
+            category={post.data.category}
+            categorySlug={post.data.categorySlug}
+            author={post.data.author}
+            readTime={post.data.readTime}
+            image={post.data.heroImage}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

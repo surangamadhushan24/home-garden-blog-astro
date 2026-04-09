@@ -1,0 +1,76 @@
+/* src/styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-body bg-cream text-gray-900 antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .tag {
+    @apply text-[0.68rem] tracking-[0.08em] uppercase font-semibold;
+  }
+  
+  .navbar {
+    @apply transition-shadow duration-300;
+  }
+  
+  .navbar.scrolled {
+    @apply shadow-[0_2px_20px_rgba(0,0,0,0.08)];
+  }
+  
+  .hero-overlay {
+    background: linear-gradient(to right, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.18) 60%, transparent 100%);
+  }
+  
+  .cat-card {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .cat-card:hover {
+    @apply -translate-y-1.5 shadow-[0_16px_40px_rgba(46,125,50,0.15)];
+  }
+  
+  .post-img {
+    @apply transition-transform duration-500 ease-out;
+  }
+  
+  .post-card:hover .post-img {
+    @apply scale-[1.06];
+  }
+  
+  .nl-input:focus {
+    @apply outline-none border-forest shadow-[0_0_0_3px_rgba(46,125,50,0.15)];
+  }
+  
+  .leaf-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234CAF50' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .delay-100 {
+    animation-delay: 0.15s;
+  }
+  .delay-200 {
+    animation-delay: 0.3s;
+  }
+  .delay-300 {
+    animation-delay: 0.45s;
+  }
+}

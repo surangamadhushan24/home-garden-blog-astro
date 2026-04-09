@@ -1,0 +1,71 @@
+---
+// src/components/sections/PopularPosts.astro
+import { getCollection } from 'astro:content';
+import { formatDate } from '../../utils/helpers';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const popularPosts = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
+
+const topics = ['Gardening', 'Decor', 'DIY', 'Kitchen', 'Plants', 'Budget Decor', 'Beginners', 'Organization'];
+---
+
+<section class="py-20 bg-mist">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-3 gap-10">
+      <!-- Popular Posts -->
+      <div class="lg:col-span-2">
+        <span class="tag text-forest">Trending Now</span>
+        <h2 class="font-display text-3xl text-bark mt-2 mb-8">Popular Posts</h2>
+
+        <div class="space-y-6">
+          {popularPosts.map(post => (
+            <div class="flex gap-5 group">
+              <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+                <img src={post.data.heroImage} alt={post.data.title} class="w-full h-full object-cover post-img" loading="lazy" />
+              </div>
+              <div class="flex-1">
+                <span class="tag text-sage">{post.data.category}</span>
+                <h4 class="font-display text-lg text-bark mt-1 group-hover:text-forest transition-colors leading-snug">
+                  <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+                </h4>
+                <p class="text-xs text-gray-400 mt-1">
+                  {formatDate(post.data.pubDate)} • {post.data.readTime} read
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-8">
+        <!-- About -->
+        <div class="bg-white rounded-2xl p-7 shadow-sm border border-sage/10">
+          <div class="w-16 h-16 bg-forest rounded-full flex items-center justify-center text-3xl mb-4 mx-auto">🌿</div>
+          <h3 class="font-display text-xl text-bark text-center mb-2">About Bloom & Grow</h3>
+          <p class="text-gray-500 text-sm text-center leading-relaxed">
+            We're passionate about helping you create a beautiful home and garden — one small change at a time. Based in the US, writing for real homes.
+          </p>
+          <a href="/about/" class="block text-center text-forest text-sm font-semibold mt-4 hover:underline">Learn More →</a>
+        </div>
+
+        <!-- Topics -->
+        <div class="bg-white rounded-2xl p-7 shadow-sm border border-sage/10">
+          <h3 class="font-display text-lg text-bark mb-4">Browse Topics</h3>
+          <div class="flex flex-wrap gap-2">
+            {topics.map(topic => (
+              <a 
+                href={`/tags/${topic.toLowerCase().replace(/\s+/g, '-')}/`} 
+                class="tag bg-mist text-forest px-3 py-1.5 rounded-full hover:bg-sage/30 transition-colors"
+              >
+                {topic}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

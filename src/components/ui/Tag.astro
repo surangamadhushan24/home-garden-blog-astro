@@ -1,0 +1,27 @@
+---
+// src/components/ui/Tag.astro
+interface Props {
+  href?: string;
+  variant?: 'default' | 'sage' | 'outline';
+}
+
+const { href, variant = 'default' } = Astro.props;
+
+const variants = {
+  default: "bg-mist text-forest hover:bg-sage/30",
+  sage: "bg-sage/80 text-bark",
+  outline: "border border-sage/30 text-forest hover:bg-mist"
+};
+
+const classes = `tag px-3 py-1.5 rounded-full transition-colors ${variants[variant]}`;
+---
+
+{href ? (
+  <a href={href} class={classes}>
+    <slot />
+  </a>
+) : (
+  <span class={classes}>
+    <slot />
+  </span>
+)}

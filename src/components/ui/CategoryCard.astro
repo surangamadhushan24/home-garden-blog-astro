@@ -1,0 +1,24 @@
+---
+// src/components/ui/CategoryCard.astro
+interface Props {
+  title: string;
+  slug: string;
+  count: number;
+  image: string;
+  emoji: string;
+}
+
+const { title, slug, count, image, emoji } = Astro.props;
+---
+
+<a href={`/${slug}/`} class="cat-card group bg-white rounded-2xl overflow-hidden shadow-sm border border-sage/10 flex flex-col h-full">
+  <div class="relative h-44 overflow-hidden">
+    <img src={image} alt={title} class="w-full h-full object-cover post-img" loading="lazy" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+    <span class="absolute top-3 left-3 text-2xl">{emoji}</span>
+  </div>
+  <div class="p-5 flex-1 flex flex-col justify-between">
+    <h3 class="font-display text-xl text-bark group-hover:text-forest transition-colors">{title}</h3>
+    <p class="text-gray-400 text-sm mt-1">{count} articles</p>
+  </div>
+</a>

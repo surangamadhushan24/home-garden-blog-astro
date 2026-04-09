@@ -1,11 +1,21 @@
 ---
+// src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Categories from '../components/sections/Categories.astro';
+import FeaturedPosts from '../components/sections/FeaturedPosts.astro';
+import PopularPosts from '../components/sections/PopularPosts.astro';
+import Newsletter from '../components/sections/Newsletter.astro';
 import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = "Home & Garden Blog";
+const description = "Your home for beautiful living, garden inspiration, DIY projects, and kitchen ideas. Bloom & Grow helps you create spaces you love.";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title={title} description={description}>
+  <Hero />
+  <Categories />
+  <FeaturedPosts />
+  <PopularPosts />
+  <Newsletter />
+</BaseLayout>

@@ -1,0 +1,89 @@
+---
+// src/components/layout/Footer.astro
+import { getCollection } from 'astro:content';
+
+const latestPost = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+
+const categories = [
+  { name: 'Home Decor', slug: 'home-decor', emoji: '🏡' },
+  { name: 'Gardening', slug: 'gardening', emoji: '🌱' },
+  { name: 'DIY Projects', slug: 'diy', emoji: '🔨' },
+  { name: 'Kitchen', slug: 'kitchen', emoji: '🍽' },
+];
+---
+
+<footer class="bg-bark text-white/70 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 bg-forest rounded-full flex items-center justify-center text-sm">🌿</div>
+          <span class="font-display text-xl text-white font-bold">Bloom & Grow</span>
+        </div>
+        <p class="text-sm leading-relaxed">
+          Inspiring beautiful homes and gardens, one article at a time. Based in the United States.
+        </p>
+        <div class="flex gap-3 mt-5">
+          {['📌', '📷', '📘', '🐦'].map((icon, i) => (
+            <a href="#" class="w-9 h-9 bg-white/10 hover:bg-forest rounded-full flex items-center justify-center transition-colors text-sm" aria-label={`Social ${i + 1}`}>
+              {icon}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Categories</h4>
+        <ul class="space-y-2.5 text-sm">
+          {categories.map(cat => (
+            <li>
+              <a href={`/${cat.slug}/`} class="hover:text-sage transition-colors">
+                {cat.emoji} {cat.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
+        <ul class="space-y-2.5 text-sm">
+          {['Home', 'All Posts', 'About Us', 'Contact', 'Privacy Policy'].map(link => (
+            <li>
+              <a href={link === 'Home' ? '/' : `/${link.toLowerCase().replace(/\s+/g, '-')}/`} class="hover:text-sage transition-colors">
+                {link}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Latest Post -->
+      <div>
+        <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Latest Post</h4>
+        {latestPost && (
+          <a href={`/blog/${latestPost.id}/`} class="group block">
+            <div class="rounded-xl overflow-hidden mb-3 h-28">
+              <img src={latestPost.data.heroImage} alt={latestPost.data.title} class="w-full h-full object-cover post-img" loading="lazy" />
+            </div>
+            <p class="text-sm text-white group-hover:text-sage transition-colors leading-snug font-display">
+              {latestPost.data.title}
+            </p>
+            <p class="text-xs mt-1">
+              {latestPost.data.pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            </p>
+          </a>
+        )}
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
+      <p>© {new Date().getFullYear()} Bloom & Grow Blog. All rights reserved.</p>
+      <p>Made with 🌿 for home & garden lovers</p>
+    </div>
+  </div>
+</footer>
