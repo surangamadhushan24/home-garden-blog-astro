@@ -8,21 +8,26 @@ const popularPosts = posts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 4);
 
-const topics = ['Gardening', 'Decor', 'DIY', 'Kitchen', 'Plants', 'Budget Decor', 'Beginners', 'Organization'];
+const topics = [
+  { name: 'Gardening', slug: 'gardening' },
+  { name: 'Home Decor', slug: 'home-decor' },
+  { name: 'DIY Projects', slug: 'diy' },
+  { name: 'Kitchen', slug: 'kitchen' }
+];
 ---
 
-<section class="py-20 bg-mist">
+<section class="py-20 bg-gradient-warm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-3 gap-10">
+    <div class="grid lg:grid-cols-3 gap-12">
       <!-- Popular Posts -->
       <div class="lg:col-span-2">
         <span class="tag text-forest">Trending Now</span>
-        <h2 class="font-display text-3xl text-bark mt-2 mb-8">Popular Posts</h2>
+        <h2 class="font-display text-4xl sm:text-5xl text-bark mt-3 mb-10">Popular Posts</h2>
 
         <div class="space-y-6">
           {popularPosts.map(post => (
-            <div class="flex gap-5 group">
-              <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+            <div class="flex gap-5 group hover:opacity-90 transition-opacity duration-300">
+              <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
                 <img src={post.data.heroImage} alt={post.data.title} class="w-full h-full object-cover post-img" loading="lazy" />
               </div>
               <div class="flex-1">
@@ -42,25 +47,25 @@ const topics = ['Gardening', 'Decor', 'DIY', 'Kitchen', 'Plants', 'Budget Decor'
       <!-- Sidebar -->
       <div class="space-y-8">
         <!-- About -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm border border-sage/10">
-          <div class="w-16 h-16 bg-forest rounded-full flex items-center justify-center text-3xl mb-4 mx-auto">🌿</div>
-          <h3 class="font-display text-xl text-bark text-center mb-2">About Bloom & Grow</h3>
-          <p class="text-gray-500 text-sm text-center leading-relaxed">
+        <div class="bg-white rounded-2xl p-8 shadow-soft border border-sage/10 hover:shadow-lg transition-shadow duration-300">
+          <div class="w-16 h-16 bg-gradient-forest rounded-full flex items-center justify-center text-3xl mb-4 mx-auto shadow-md">🌿</div>
+          <h3 class="font-display text-xl text-bark text-center mb-3">About Bloom & Grow</h3>
+          <p class="text-gray-600 text-sm text-center leading-relaxed">
             We're passionate about helping you create a beautiful home and garden — one small change at a time. Based in the US, writing for real homes.
           </p>
-          <a href="/about/" class="block text-center text-forest text-sm font-semibold mt-4 hover:underline">Learn More →</a>
+          <a href="/about/" class="block text-center text-forest text-sm font-bold mt-5 hover:text-leaf transition-colors duration-300">Learn More →</a>
         </div>
 
         <!-- Topics -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm border border-sage/10">
-          <h3 class="font-display text-lg text-bark mb-4">Browse Topics</h3>
+        <div class="bg-white rounded-2xl p-8 shadow-soft border border-sage/10 hover:shadow-lg transition-shadow duration-300">
+          <h3 class="font-display text-lg text-bark mb-5">Browse Topics</h3>
           <div class="flex flex-wrap gap-2">
             {topics.map(topic => (
               <a 
-                href={`/tags/${topic.toLowerCase().replace(/\s+/g, '-')}/`} 
-                class="tag bg-mist text-forest px-3 py-1.5 rounded-full hover:bg-sage/30 transition-colors"
+                href={`/${topic.slug}/`} 
+                class="bg-sage/15 text-forest px-3.5 py-2 rounded-full hover:bg-forest hover:text-white transition-all duration-300 text-sm font-semibold"
               >
-                {topic}
+                {topic.name}
               </a>
             ))}
           </div>

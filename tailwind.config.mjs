@@ -9,11 +9,14 @@ export default {
         mist: '#F1F8F1',
         bark: '#3E2723',
         clay: '#BCAAA4',
-        cream: '#FAFAF7',
+        cream: 'rgb(250 250 247 / <alpha-value>)',  // ← fixes bg-cream/98 too
       },
       fontFamily: {
         display: ['"Playfair Display"', 'Georgia', 'serif'],
         body: ['"DM Sans"', 'sans-serif'],
+      },
+      transitionDuration: {
+        400: '400ms',  // ← fixes duration-400
       },
       animation: {
         'fade-up': 'fadeUp 0.7s ease forwards',

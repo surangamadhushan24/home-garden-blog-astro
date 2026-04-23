@@ -11,23 +11,31 @@ const categories = [
   { name: 'DIY Projects', slug: 'diy', emoji: '🔨' },
   { name: 'Kitchen', slug: 'kitchen', emoji: '🍽' },
 ];
+
+const quickLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
+  { label: 'Privacy Policy', href: '/privacy-policy/' },
+];
 ---
 
-<footer class="bg-bark text-white/70 mt-auto">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+<footer class="bg-gradient-to-b from-bark to-black/95 text-white/75 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
       <!-- Brand -->
       <div>
-        <div class="flex items-center gap-2 mb-4">
-          <div class="w-8 h-8 bg-forest rounded-full flex items-center justify-center text-sm">🌿</div>
-          <span class="font-display text-xl text-white font-bold">Bloom & Grow</span>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-gradient-forest rounded-full flex items-center justify-center text-white font-bold shadow-lg">🌿</div>
+          <span class="font-display text-2xl text-white font-bold">Bloom & Grow</span>
         </div>
-        <p class="text-sm leading-relaxed">
+        <p class="text-sm leading-relaxed text-white/70">
           Inspiring beautiful homes and gardens, one article at a time. Based in the United States.
         </p>
-        <div class="flex gap-3 mt-5">
+        <div class="flex gap-3 mt-6">
           {['📌', '📷', '📘', '🐦'].map((icon, i) => (
-            <a href="#" class="w-9 h-9 bg-white/10 hover:bg-forest rounded-full flex items-center justify-center transition-colors text-sm" aria-label={`Social ${i + 1}`}>
+            <a href="#" class="w-9 h-9 bg-white/10 hover:bg-forest/80 rounded-full flex items-center justify-center transition-all duration-300 text-sm hover:-translate-y-1" aria-label={`Social ${i + 1}`}>
               {icon}
             </a>
           ))}
@@ -36,12 +44,13 @@ const categories = [
 
       <!-- Categories -->
       <div>
-        <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Categories</h4>
-        <ul class="space-y-2.5 text-sm">
+        <h4 class="text-white font-bold mb-5 text-sm uppercase tracking-widest">Categories</h4>
+        <ul class="space-y-3 text-sm">
           {categories.map(cat => (
             <li>
-              <a href={`/${cat.slug}/`} class="hover:text-sage transition-colors">
-                {cat.emoji} {cat.name}
+              <a href={`/${cat.slug}/`} class="text-white/70 hover:text-sage transition-all duration-300 flex items-center gap-2 group">
+                <span class="group-hover:scale-125 transition-transform">{cat.emoji}</span>
+                <span class="group-hover:translate-x-1 transition-transform">{cat.name}</span>
               </a>
             </li>
           ))}
@@ -50,12 +59,13 @@ const categories = [
 
       <!-- Quick Links -->
       <div>
-        <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
-        <ul class="space-y-2.5 text-sm">
-          {['Home', 'All Posts', 'About Us', 'Contact', 'Privacy Policy'].map(link => (
+        <h4 class="text-white font-bold mb-5 text-sm uppercase tracking-widest">Quick Links</h4>
+        <ul class="space-y-3 text-sm">
+          {quickLinks.map(link => (
             <li>
-              <a href={link === 'Home' ? '/' : `/${link.toLowerCase().replace(/\s+/g, '-')}/`} class="hover:text-sage transition-colors">
-                {link}
+              <a href={link.href} class="text-white/70 hover:text-white transition-all duration-300 flex items-center gap-2 group">
+                <span class="inline-block group-hover:translate-x-1 transition-transform">→</span>
+                <span>{link.label}</span>
               </a>
             </li>
           ))}
@@ -64,11 +74,11 @@ const categories = [
 
       <!-- Latest Post -->
       <div>
-        <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Latest Post</h4>
+        <h4 class="text-white font-bold mb-5 text-sm uppercase tracking-widest">Latest Post</h4>
         {latestPost && (
-          <a href={`/blog/${latestPost.id}/`} class="group block">
-            <div class="rounded-xl overflow-hidden mb-3 h-28">
-              <img src={latestPost.data.heroImage} alt={latestPost.data.title} class="w-full h-full object-cover post-img" loading="lazy" />
+          <a href={`/blog/${latestPost.id}/`} class="group block hover:opacity-80 transition-opacity duration-300">
+            <div class="rounded-xl overflow-hidden mb-3 h-28 shadow-lg hover:shadow-xl transition-shadow">
+              <img src={latestPost.data.heroImage} alt={latestPost.data.title} class="w-full h-full object-cover post-img group-hover:scale-105 transition-transform duration-500" loading="lazy" />
             </div>
             <p class="text-sm text-white group-hover:text-sage transition-colors leading-snug font-display">
               {latestPost.data.title}

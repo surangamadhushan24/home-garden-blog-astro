@@ -5,21 +5,21 @@
 <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" id="newsletter-form">
   <input
     type="email"
-    placeholder="Your email address"
+    placeholder="Enter your email..."
     required
-    class="nl-input flex-1 px-5 py-3.5 rounded-full text-bark text-sm border-2 border-transparent focus:border-sage bg-white shadow-md"
+    class="nl-input flex-1 px-5 py-3.5 rounded-full text-bark text-sm border-2 border-white/30 focus:border-white bg-white/90 placeholder:text-gray-400 font-medium shadow-md"
     aria-label="Email address"
     id="email-input"
   />
   <button 
     type="submit"
-    class="bg-sage hover:bg-white text-forest font-semibold px-7 py-3.5 rounded-full transition-colors shadow-md whitespace-nowrap"
+    class="bg-white text-forest hover:bg-sage/20 font-semibold px-7 py-3.5 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 whitespace-nowrap"
     id="submit-btn"
   >
-    Subscribe Free
+    Subscribe
   </button>
 </div>
-<p class="text-sage/60 text-xs mt-4">Unsubscribe anytime. We respect your privacy.</p>
+<p class="text-white/70 text-xs mt-4 font-medium">Unsubscribe anytime. We respect your privacy.</p>
 
 <script>
   const form = document.getElementById('newsletter-form');

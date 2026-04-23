@@ -1,0 +1,72 @@
+---
+// src/components/sections/Categories.astro
+import CategoryCard from '../ui/CategoryCard.astro';
+
+const categories = [
+  {
+    title: 'Home Decor',
+    slug: 'home-decor',
+    count: 12,
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80&auto=format&fit=crop',
+    emoji: '🏡'
+  },
+  {
+    title: 'Gardening',
+    slug: 'gardening',
+    count: 8,
+    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80&auto=format&fit=crop',
+    emoji: '🌱'
+  },
+  {
+    title: 'DIY Projects',
+    slug: 'diy',
+    count: 10,
+    image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=600&q=80&auto=format&fit=crop',
+    emoji: '🔨'
+  },
+  {
+    title: 'Kitchen',
+    slug: 'kitchen',
+    count: 6,
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80&auto=format&fit=crop',
+    emoji: '🍽'
+  },
+];
+---
+
+<section class="py-20 bg-gradient-warm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-14">
+      <span class="tag text-forest">Categories</span>
+      <h2 class="font-display text-4xl sm:text-5xl text-bark mt-3 mb-4">Explore Topics</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+        Discover articles organized by topic. From home decor inspiration to gardening tips, find exactly what you're looking for.
+      </p>
+    </div>
+
+    <!-- Category Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {categories.map(category => (
+        <CategoryCard
+          title={category.title}
+          slug={category.slug}
+          count={category.count}
+          image={category.image}
+          emoji={category.emoji}
+        />
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-14">
+      <p class="text-gray-600 mb-4">Want to explore more?</p>
+      <a href="/blog/" class="inline-flex items-center gap-2 bg-forest text-white px-8 py-3.5 rounded-full font-semibold hover:bg-leaf transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+        View All Articles
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

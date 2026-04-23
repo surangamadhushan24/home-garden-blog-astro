@@ -1,0 +1,51 @@
+---
+// src/components/sections/FeaturedPosts.astro
+import { getCollection } from 'astro:content';
+import PostCard from '../ui/PostCard.astro';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft && data.featured);
+const featuredPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<section id="featured" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <span class="tag text-forest">Featured</span>
+      <h2 class="font-display text-4xl text-bark mt-2">Featured Articles</h2>
+      <p class="text-gray-600 mt-3 max-w-2xl mx-auto">
+        Discover our handpicked articles on home decor, gardening, DIY projects, and kitchen inspiration.
+      </p>
+    </div>
+
+    {featuredPosts.length > 0 ? (
+      <div class="grid md:grid-cols-2 gap-8">
+        {featuredPosts.map(post => (
+          <PostCard
+            title={post.data.title}
+            slug={post.id}
+            description={post.data.description}
+            category={post.data.category}
+            categorySlug={post.data.categorySlug}
+            author={post.data.author}
+            readTime={post.data.readTime}
+            image={post.data.heroImage}
+            featured={true}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-12">
+        <p class="text-gray-500">No featured articles yet. Check back soon!</p>
+      </div>
+    )}
+
+    <div class="text-center mt-12">
+      <a href="/blog/" class="inline-flex items-center gap-2 bg-forest text-white px-8 py-4 rounded-full font-semibold hover:bg-leaf transition-colors shadow-md">
+        View All Articles
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
