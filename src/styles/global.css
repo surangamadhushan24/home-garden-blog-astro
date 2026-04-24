@@ -13,7 +13,7 @@
   }
   
   body {
-    @apply font-body bg-cream text-gray-900 antialiased;
+    @apply font-body bg-cream text-gray-900 antialiased dark:bg-gray-900 dark:text-gray-100;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -39,7 +39,7 @@
 
 @layer components {
   .tag {
-    @apply text-[0.68rem] tracking-[0.08em] uppercase font-semibold bg-sage/20 text-forest px-3 py-1.5 rounded-full inline-block;
+    @apply text-[0.68rem] tracking-[0.08em] uppercase font-semibold bg-sage/20 text-forest px-3 py-1.5 rounded-full inline-block dark:bg-sage/30 dark:text-leaf;
   }
   
   .navbar {

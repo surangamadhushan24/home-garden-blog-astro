@@ -7,87 +7,87 @@ const description = "Get in touch with Bloom & Grow. We'd love to hear from you 
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="bg-cream py-16">
+  <div class="bg-cream py-16 dark:bg-gray-900">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div class="text-center mb-12">
         <span class="tag text-forest">Get In Touch</span>
-        <h1 class="font-display text-4xl text-bark mt-2">Contact Us</h1>
-        <p class="text-gray-600 mt-3">We'd love to hear from you! Send us a message and we'll respond as soon as possible.</p>
+        <h1 class="font-display text-4xl text-bark mt-2 dark:text-gray-100">Contact Us</h1>
+        <p class="text-gray-600 mt-3 dark:text-gray-300">We'd love to hear from you! Send us a message and we'll respond as soon as possible.</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8 mb-12">
         <!-- Email -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm border border-sage/10 text-center">
+        <div class="bg-white rounded-2xl p-7 shadow-sm border border-sage/10 text-center dark:bg-gray-800 dark:border-gray-700/20">
           <div class="w-14 h-14 bg-forest rounded-full flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
             </svg>
           </div>
-          <h3 class="font-display text-lg text-bark mb-2">Email</h3>
+          <h3 class="font-display text-lg text-bark mb-2 dark:text-gray-100">Email</h3>
           <a href="mailto:hello@bloomandgrow.blog" class="text-forest hover:text-leaf font-medium transition-colors">
             hello@bloomandgrow.blog
           </a>
         </div>
 
         <!-- Location -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm border border-sage/10 text-center">
+        <div class="bg-white rounded-2xl p-7 shadow-sm border border-sage/10 text-center dark:bg-gray-800 dark:border-gray-700/20">
           <div class="w-14 h-14 bg-forest rounded-full flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
           </div>
-          <h3 class="font-display text-lg text-bark mb-2">Location</h3>
-          <p class="text-gray-600">
+          <h3 class="font-display text-lg text-bark mb-2 dark:text-gray-100">Location</h3>
+          <p class="text-gray-600 dark:text-gray-300">
             United States<br/>
-            <span class="text-sm text-gray-500">We're based across the US</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">We're based across the US</span>
           </p>
         </div>
 
         <!-- Response Time -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm border border-sage/10 text-center">
+        <div class="bg-white rounded-2xl p-7 shadow-sm border border-sage/10 text-center dark:bg-gray-800 dark:border-gray-700/20">
           <div class="w-14 h-14 bg-forest rounded-full flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
-          <h3 class="font-display text-lg text-bark mb-2">Response Time</h3>
-          <p class="text-gray-600">
+          <h3 class="font-display text-lg text-bark mb-2 dark:text-gray-100">Response Time</h3>
+          <p class="text-gray-600 dark:text-gray-300">
             Within 24 hours<br/>
-            <span class="text-sm text-gray-500">Business days</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Business days</span>
           </p>
         </div>
       </div>
 
       <!-- Contact Form -->
-      <div class="bg-white rounded-2xl p-10 shadow-sm border border-sage/10">
-        <h2 class="font-display text-2xl text-bark mb-8">Send us a Message</h2>
+      <div class="bg-white rounded-2xl p-10 shadow-sm border border-sage/10 dark:bg-gray-800 dark:border-gray-700/20">
+        <h2 class="font-display text-2xl text-bark mb-8 dark:text-gray-100">Send us a Message</h2>
         
         <form id="contact-form" class="space-y-6">
           <div class="grid md:grid-cols-2 gap-6">
             <!-- Name -->
             <div>
-              <label for="name" class="block text-sm font-semibold text-bark mb-2">Full Name *</label>
+              <label for="name" class="block text-sm font-semibold text-bark mb-2 dark:text-gray-100">Full Name *</label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 required
-                class="w-full px-4 py-3 border border-sage/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+                class="w-full px-4 py-3 border border-sage/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
                 placeholder="Your name"
               />
             </div>
 
             <!-- Email -->
             <div>
-              <label for="email" class="block text-sm font-semibold text-bark mb-2">Email Address *</label>
+              <label for="email" class="block text-sm font-semibold text-bark mb-2 dark:text-gray-100">Email Address *</label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 required
-                class="w-full px-4 py-3 border border-sage/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+                class="w-full px-4 py-3 border border-sage/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
                 placeholder="your@email.com"
               />
             </div>
@@ -95,12 +95,12 @@ const description = "Get in touch with Bloom & Grow. We'd love to hear from you 
 
           <!-- Subject -->
           <div>
-            <label for="subject" class="block text-sm font-semibold text-bark mb-2">Subject *</label>
+            <label for="subject" class="block text-sm font-semibold text-bark mb-2 dark:text-gray-100">Subject *</label>
             <select
               id="subject"
               name="subject"
               required
-              class="w-full px-4 py-3 border border-sage/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors"
+              class="w-full px-4 py-3 border border-sage/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
             >
               <option value="">Select a subject</option>
               <option value="general">General Inquiry</option>
@@ -114,13 +114,13 @@ const description = "Get in touch with Bloom & Grow. We'd love to hear from you 
 
           <!-- Message -->
           <div>
-            <label for="message" class="block text-sm font-semibold text-bark mb-2">Message *</label>
+            <label for="message" class="block text-sm font-semibold text-bark mb-2 dark:text-gray-100">Message *</label>
             <textarea
               id="message"
               name="message"
               required
               rows="6"
-              class="w-full px-4 py-3 border border-sage/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors resize-none"
+              class="w-full px-4 py-3 border border-sage/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest transition-colors resize-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
               placeholder="Tell us what's on your mind..."
             ></textarea>
           </div>
@@ -134,7 +134,7 @@ const description = "Get in touch with Bloom & Grow. We'd love to hear from you 
           </button>
 
           <!-- Form Message -->
-          <p class="text-sm text-gray-500 text-center">
+          <p class="text-sm text-gray-500 text-center dark:text-gray-400">
             We respect your privacy. Your information will only be used to respond to your inquiry.
           </p>
         </form>
@@ -142,51 +142,51 @@ const description = "Get in touch with Bloom & Grow. We'd love to hear from you 
 
       <!-- FAQ Section -->
       <div class="mt-16">
-        <h2 class="font-display text-2xl text-bark mb-8">Frequently Asked Questions</h2>
+        <h2 class="font-display text-2xl text-bark mb-8 dark:text-gray-100">Frequently Asked Questions</h2>
         
         <div class="space-y-4">
           <!-- FAQ Item 1 -->
-          <details class="bg-white rounded-xl border border-sage/10 p-6 group cursor-pointer">
-            <summary class="font-semibold text-bark flex items-center justify-between">
+          <details class="bg-white rounded-xl border border-sage/10 p-6 group cursor-pointer dark:bg-gray-800 dark:border-gray-700/20">
+            <summary class="font-semibold text-bark flex items-center justify-between dark:text-gray-100">
               How often do you publish new articles?
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
               </svg>
             </summary>
-            <p class="text-gray-600 mt-4">We publish new articles weekly, covering home decor, gardening, DIY projects, and kitchen topics. Subscribe to our newsletter to stay updated!</p>
+            <p class="text-gray-600 mt-4 dark:text-gray-300">We publish new articles weekly, covering home decor, gardening, DIY projects, and kitchen topics. Subscribe to our newsletter to stay updated!</p>
           </details>
 
           <!-- FAQ Item 2 -->
-          <details class="bg-white rounded-xl border border-sage/10 p-6 group cursor-pointer">
-            <summary class="font-semibold text-bark flex items-center justify-between">
+          <details class="bg-white rounded-xl border border-sage/10 p-6 group cursor-pointer dark:bg-gray-800 dark:border-gray-700/20">
+            <summary class="font-semibold text-bark flex items-center justify-between dark:text-gray-100">
               Can I contribute to Bloom & Grow?
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
               </svg>
             </summary>
-            <p class="text-gray-600 mt-4">We love hearing from our community! If you're interested in guest posting or collaborating, please contact us with details about your idea.</p>
+            <p class="text-gray-600 mt-4 dark:text-gray-300">We love hearing from our community! If you're interested in guest posting or collaborating, please contact us with details about your idea.</p>
           </details>
 
           <!-- FAQ Item 3 -->
-          <details class="bg-white rounded-xl border border-sage/10 p-6 group cursor-pointer">
-            <summary class="font-semibold text-bark flex items-center justify-between">
+          <details class="bg-white rounded-xl border border-sage/10 p-6 group cursor-pointer dark:bg-gray-800 dark:border-gray-700/20">
+            <summary class="font-semibold text-bark flex items-center justify-between dark:text-gray-100">
               How can I unsubscribe from the newsletter?
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
               </svg>
             </summary>
-            <p class="text-gray-600 mt-4">You can unsubscribe anytime by clicking the unsubscribe link at the bottom of any newsletter email. We respect your preferences!</p>
+            <p class="text-gray-600 mt-4 dark:text-gray-300">You can unsubscribe anytime by clicking the unsubscribe link at the bottom of any newsletter email. We respect your preferences!</p>
           </details>
 
           <!-- FAQ Item 4 -->
-          <details class="bg-white rounded-xl border border-sage/10 p-6 group cursor-pointer">
-            <summary class="font-semibold text-bark flex items-center justify-between">
+          <details class="bg-white rounded-xl border border-sage/10 p-6 group cursor-pointer dark:bg-gray-800 dark:border-gray-700/20">
+            <summary class="font-semibold text-bark flex items-center justify-between dark:text-gray-100">
               Do you have social media accounts?
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
               </svg>
             </summary>
-            <p class="text-gray-600 mt-4">Yes! You can find us on Pinterest, Instagram, Facebook, and Twitter. Follow us for daily inspiration and quick tips!</p>
+            <p class="text-gray-600 mt-4 dark:text-gray-300">Yes! You can find us on Pinterest, Instagram, Facebook, and Twitter. Follow us for daily inspiration and quick tips!</p>
           </details>
         </div>
       </div>

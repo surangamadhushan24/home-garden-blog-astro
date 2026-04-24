@@ -70,18 +70,18 @@ const relatedPosts = allPosts
     
     <!-- Content -->
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="prose prose-lg max-w-none prose-headings:font-display prose-a:text-forest hover:prose-a:text-leaf">
+      <div class="prose prose-lg max-w-none prose-headings:font-display prose-a:text-forest hover:prose-a:text-leaf dark:prose-invert">
         <slot />
       </div>
       
       <!-- Tags -->
-      <div class="mt-12 pt-8 border-t border-sage/20">
-        <h3 class="font-display text-lg text-bark mb-3">Tags</h3>
+      <div class="mt-12 pt-8 border-t border-sage/20 dark:border-gray-700/20 bg-white dark:bg-gray-800 p-6 rounded-lg">
+        <h3 class="font-display text-lg text-bark mb-3 dark:text-gray-100">Tags</h3>
         <div class="flex flex-wrap gap-2">
           {tags.map(tag => (
             <a 
               href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-              class="tag bg-mist text-forest px-3 py-1.5 rounded-full hover:bg-sage/30 transition-colors"
+              class="tag bg-mist text-forest px-3 py-1.5 rounded-full hover:bg-sage/30 transition-colors dark:bg-gray-700 dark:text-leaf dark:hover:bg-gray-600"
             >
               {tag}
             </a>
@@ -90,13 +90,13 @@ const relatedPosts = allPosts
       </div>
       
       <!-- Author Box -->
-      <div class="mt-12 bg-mist rounded-2xl p-6 flex items-start gap-4">
+      <div class="mt-12 bg-mist rounded-2xl p-6 flex items-start gap-4 dark:bg-gray-800">
         <div class="w-16 h-16 bg-forest rounded-full flex items-center justify-center text-2xl flex-shrink-0">
           🌿
         </div>
         <div>
-          <h4 class="font-display text-lg text-bark">{author}</h4>
-          <p class="text-gray-500 text-sm mt-1">
+          <h4 class="font-display text-lg text-bark dark:text-gray-100">{author}</h4>
+          <p class="text-gray-500 text-sm mt-1 dark:text-gray-400">
             Contributing writer at Bloom & Grow, passionate about creating beautiful living spaces.
           </p>
         </div>
@@ -105,18 +105,18 @@ const relatedPosts = allPosts
     
     <!-- Related Posts -->
     {relatedPosts.length > 0 && (
-      <section class="bg-mist py-16">
+      <section class="bg-mist py-16 dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 class="font-display text-2xl text-bark mb-8">Related Articles</h2>
+          <h2 class="font-display text-2xl text-bark mb-8 dark:text-gray-100">Related Articles</h2>
           <div class="grid md:grid-cols-3 gap-6">
             {relatedPosts.map(post => (
-              <a href={`/blog/${post.id}/`} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <a href={`/blog/${post.id}/`} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow dark:bg-gray-700">
                 <div class="h-40 overflow-hidden">
                   <img src={post.data.heroImage} alt={post.data.title} class="w-full h-full object-cover post-img" />
                 </div>
                 <div class="p-4">
                   <span class="tag text-forest text-xs">{post.data.category}</span>
-                  <h3 class="font-display text-lg text-bark mt-1 group-hover:text-forest transition-colors line-clamp-2">
+                  <h3 class="font-display text-lg text-bark mt-1 group-hover:text-forest transition-colors line-clamp-2 dark:text-gray-100 dark:group-hover:text-leaf">
                     {post.data.title}
                   </h3>
                 </div>

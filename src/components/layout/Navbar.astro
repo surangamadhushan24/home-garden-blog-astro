@@ -1,6 +1,7 @@
 ---
 // src/components/layout/Navbar.astro
 import Button from '../ui/Button.astro';
+import ThemeToggle from '../ui/ThemeToggle.astro';
 
 const navLinks = [
   { href: '/', label: 'Home', active: true },
@@ -14,7 +15,7 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<nav id="navbar" class="navbar fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-md border-b border-sage/20">
+<nav id="navbar" class="navbar fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-md border-b border-sage/20 dark:bg-gray-900/95 dark:border-gray-700/20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
@@ -22,7 +23,7 @@ const currentPath = Astro.url.pathname;
         <div class="w-9 h-9 bg-gradient-forest rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md group-hover:scale-110 transition-transform duration-300">
           🌿
         </div>
-        <span class="font-display text-xl font-bold text-bark tracking-tight group-hover:text-forest transition-colors duration-300">
+        <span class="font-display text-xl font-bold text-bark tracking-tight group-hover:text-forest transition-colors duration-300 dark:text-gray-100 dark:group-hover:text-leaf">
           Bloom <span class="text-forest">&</span> Grow
         </span>
       </a>
@@ -34,8 +35,8 @@ const currentPath = Astro.url.pathname;
             href={link.href} 
             class={`text-sm font-semibold transition-all duration-300 pb-1 relative ${
               currentPath === link.href 
-                ? 'text-forest border-b-2 border-forest' 
-                : 'text-gray-600 hover:text-forest after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-forest after:transition-all after:duration-300 hover:after:w-full'
+                ? 'text-forest border-b-2 border-forest dark:text-leaf dark:border-leaf' 
+                : 'text-gray-600 hover:text-forest after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-forest after:transition-all after:duration-300 hover:after:w-full dark:text-gray-300 dark:hover:text-leaf dark:after:bg-leaf'
             }`}
           >
             {link.label}
@@ -45,6 +46,7 @@ const currentPath = Astro.url.pathname;
 
       <!-- Right Actions -->
       <div class="flex items-center gap-4">
+        <ThemeToggle />
         <a 
           href="#newsletter" 
           class="hidden sm:inline-flex items-center gap-2 bg-forest text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-leaf transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
@@ -53,7 +55,7 @@ const currentPath = Astro.url.pathname;
           Subscribe
         </a>
         
-        <button type="button" id="menu-btn" class="md:hidden p-2 text-gray-600 hover:text-forest hover:bg-sage/10 rounded-lg transition-colors duration-300" aria-label="Menu">
+        <button type="button" id="menu-btn" class="md:hidden p-2 text-gray-600 hover:text-forest hover:bg-sage/10 rounded-lg transition-colors duration-300 dark:text-gray-300 dark:hover:text-leaf dark:hover:bg-gray-700/20" aria-label="Menu">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
@@ -62,13 +64,13 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden hidden pb-4 border-t border-sage/20 pt-3">
+    <div id="mobile-menu" class="md:hidden hidden pb-4 border-t border-sage/20 pt-3 dark:border-gray-700/20">
       <div class="flex flex-col gap-3">
         {navLinks.map(link => (
           <a 
             href={link.href} 
             class={`text-sm font-medium px-2 ${
-              currentPath === link.href ? 'text-forest' : 'text-gray-600'
+              currentPath === link.href ? 'text-forest dark:text-leaf' : 'text-gray-600 dark:text-gray-300'
             }`}
           >
             {link.label === 'Home Decor' ? '🏡 ' : 
