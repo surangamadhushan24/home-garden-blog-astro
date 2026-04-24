@@ -55,9 +55,9 @@ const currentPath = Astro.url.pathname;
           Subscribe
         </a>
         
-        <button type="button" id="menu-btn" class="md:hidden p-2 text-gray-600 hover:text-forest hover:bg-sage/10 rounded-lg transition-colors duration-300 dark:text-gray-300 dark:hover:text-leaf dark:hover:bg-gray-700/20" aria-label="Menu">
+        <button type="button" id="menu-btn" class="md:hidden p-2 text-gray-600 hover:text-forest hover:bg-sage/10 rounded-lg transition-colors duration-300 dark:text-gray-300 dark:hover:text-leaf dark:hover:bg-gray-700/20" aria-label="Menu" aria-controls="mobile-menu" aria-expanded="false">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
       </div>
@@ -87,23 +87,40 @@ const currentPath = Astro.url.pathname;
   </div>
 </nav>
 
-<script define:vars={{}} client:load>
+<script client:load>
+  function setMenuState(menuBtn, mobileMenu, open) {
+    if (!menuBtn || !mobileMenu) return;
+
+    mobileMenu.classList.toggle('hidden', !open);
+    mobileMenu.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+
+    const iconPath = menuBtn.querySelector('#menu-icon');
+    if (!iconPath) return;
+
+    iconPath.setAttribute('d', open
+      ? 'M6 18L18 6M6 6l12 12'
+      : 'M4 6h16M4 12h16M4 18h16'
+    );
+  }
+
+  function handleMenuToggle(event) {
+    const menuBtn = event.target.closest('#menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (!menuBtn || !mobileMenu) return;
+
+    const isOpen = mobileMenu.classList.contains('hidden');
+    setMenuState(menuBtn, mobileMenu, isOpen);
+  }
+
   function initNavbarActions() {
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const navbar = document.getElementById('navbar');
 
     if (menuBtn && mobileMenu) {
-      menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        const icon = menuBtn.querySelector('svg');
-        if (icon) {
-          const isOpen = !mobileMenu.classList.contains('hidden');
-          icon.innerHTML = isOpen
-            ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>'
-            : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>';
-        }
-      });
+      setMenuState(menuBtn, mobileMenu, false);
+      document.addEventListener('click', handleMenuToggle);
     }
 
     if (navbar) {
@@ -113,9 +130,5 @@ const currentPath = Astro.url.pathname;
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initNavbarActions);
-  } else {
-    initNavbarActions();
-  }
+  initNavbarActions();
 </script>
