@@ -13,8 +13,8 @@ export default {
         cream: 'rgb(250 250 247 / <alpha-value>)',  // ← fixes bg-cream/98 too
       },
       fontFamily: {
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
-        body: ['"DM Sans"', 'sans-serif'],
+        display: ['"Lora"', 'Georgia', 'serif'],
+        body: ['"Open Sans"', 'sans-serif'],
       },
       transitionDuration: {
         400: '400ms',  // ← fixes duration-400
