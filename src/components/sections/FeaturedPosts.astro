@@ -5,33 +5,85 @@ import PostCard from '../ui/PostCard.astro';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft && data.featured);
 const featuredPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const heroPost = featuredPosts[0];
+const secondaryPosts = featuredPosts.slice(1, 3);
 ---
 
-<section id="featured" class="py-20 bg-white dark:bg-gray-900">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
+<section id="featured" class="relative overflow-hidden py-20 bg-[radial-gradient(circle_at_top_left,rgba(110,231,183,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(34,197,94,0.10),transparent_35%),linear-gradient(180deg,#f8fbf7_0%,#ffffff_100%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_20%),linear-gradient(180deg,#020617_0%,#0f172a_100%)]">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute left-1/3 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-forest/10 blur-3xl dark:bg-cyan-500/10" />
+    <div class="absolute right-0 top-24 h-64 w-64 rounded-full bg-leaf/10 blur-3xl dark:bg-slate-700/40" />
+    <div class="absolute left-0 bottom-10 h-56 w-56 rounded-full bg-sage/10 blur-3xl dark:bg-slate-800/40" />
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
       <span class="tag text-forest">Featured</span>
-      <h2 class="font-display text-4xl text-bark mt-2 dark:text-gray-100">Featured Articles</h2>
-      <p class="text-gray-600 mt-3 max-w-2xl mx-auto dark:text-gray-300">
-        Discover our handpicked articles on home decor, gardening, DIY projects, and kitchen inspiration.
+      <h2 class="font-display text-4xl sm:text-5xl text-slate-900 mt-4 dark:text-gray-100">Featured Articles</h2>
+      <p class="text-slate-600 mt-4 max-w-2xl mx-auto dark:text-slate-300">
+        Discover our handpicked stories on home design, garden inspiration, DIY refreshes, and kitchen style.
       </p>
     </div>
 
     {featuredPosts.length > 0 ? (
-      <div class="grid md:grid-cols-2 gap-8">
-        {featuredPosts.map(post => (
-          <PostCard
-            title={post.data.title}
-            slug={post.id}
-            description={post.data.description}
-            category={post.data.category}
-            categorySlug={post.data.categorySlug}
-            author={post.data.author}
-            readTime={post.data.readTime}
-            image={post.data.heroImage}
-            featured={true}
-          />
-        ))}
+      <div class="grid gap-8">
+        <div class="rounded-[2rem] border border-sage/15 bg-white/95 p-1 shadow-soft backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/90">
+          <article class="group relative overflow-hidden rounded-[2rem] bg-white shadow-xl transition-transform duration-500 hover:-translate-y-1 dark:bg-slate-950">
+            <div class="relative h-[24rem] overflow-hidden sm:h-[28rem]">
+              <img src={heroPost.data.heroImage} alt={heroPost.data.title} class="absolute inset-0 h-full w-full object-cover transition-transform duration-[700ms] ease-out group-hover:scale-105" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div class="absolute left-5 top-5">
+                <span class="tag bg-white/95 text-forest dark:bg-slate-800/95 dark:text-leaf">{heroPost.data.category}</span>
+              </div>
+              <div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+                <p class="text-[0.72rem] uppercase tracking-[0.32em] text-forest font-semibold mb-3">Editor’s pick</p>
+                <h3 class="font-display text-3xl sm:text-4xl text-white leading-tight mb-4">{heroPost.data.title}</h3>
+                <p class="max-w-2xl text-sm text-gray-100/85 leading-relaxed mb-5 line-clamp-3">{heroPost.data.description}</p>
+                <div class="flex flex-wrap items-center gap-3 text-xs text-gray-100/80 mb-5">
+                  <span class="font-medium">{heroPost.data.author}</span>
+                  <span class="h-2 w-2 rounded-full bg-white/50" />
+                  <span>{heroPost.data.readTime}</span>
+                </div>
+                <a href={`/blog/${heroPost.id}/`} class="inline-flex items-center gap-2 mt-1 font-semibold text-white underline underline-offset-4 decoration-white/70 hover:text-leaf">
+                  Read Article
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-3">
+          <div class="rounded-[2rem] border border-sage/15 bg-sage/50 p-7 shadow-soft dark:border-slate-700 dark:bg-slate-800/80">
+            <p class="text-sm uppercase tracking-[0.22em] text-forest font-semibold">Why these articles</p>
+            <h3 class="mt-4 text-2xl font-display text-bark dark:text-gray-100">Fresh ideas for every corner of your home</h3>
+            <p class="mt-4 text-slate-600 leading-relaxed dark:text-slate-300">
+              Each story is chosen for floral styling, cozy spaces, practical gardening tips, and easy weekend projects.
+            </p>
+            <a href="/blog/" class="inline-flex items-center gap-2 mt-6 rounded-full bg-white px-6 py-3 text-sm font-semibold text-forest shadow-sm transition hover:bg-sage/80 hover:text-white dark:bg-slate-900 dark:text-white dark:hover:bg-forest">
+              Browse all articles
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+
+          {secondaryPosts.map((post, index) => (
+            <PostCard
+              title={post.data.title}
+              slug={post.id}
+              description={post.data.description}
+              category={post.data.category}
+              categorySlug={post.data.categorySlug}
+              author={post.data.author}
+              readTime={post.data.readTime}
+              image={post.data.heroImage}
+              featured={false}
+            />
+          ))}
+        </div>
       </div>
     ) : (
       <div class="text-center py-12">
@@ -39,11 +91,12 @@ const featuredPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pub
       </div>
     )}
 
-    <div class="text-center mt-12">
-      <a href="/blog/" class="inline-flex items-center gap-2 bg-forest text-white px-8 py-4 rounded-full font-semibold hover:bg-leaf transition-colors shadow-md">
-        View All Articles
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+    <div class="text-center mt-14">
+      <a href="/blog/" class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-forest px-8 py-4 text-sm font-semibold text-white shadow-medium transition hover:opacity-95">
+        View all articles
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14" />
+          <path d="M13 6l6 6-6 6" />
         </svg>
       </a>
     </div>
